@@ -15,9 +15,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Pixel position, from 0 to 1 across the screen.
     vec2 uv = fragCoord / iResolution.xy;
 
-    float angle = PI / 2.0;
+    float angle = iTime;
+    vec2 offset = vec2(0.5);
 
-    vec2 new_uv = mod(uv * repeat, 1.) * spacing;
+    vec2 rot_uv = vec2(uv.x * sin(angle) - uv.y * cos(angle), uv.x * cos(angle) + uv.y * sin(angle));
+
+    vec2 new_uv = mod(rot_uv * repeat, 1.) * spacing;
 
     fragColor = vec4(new_uv.x, new_uv.y, 0.0, 1.0);
 
