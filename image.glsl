@@ -5,7 +5,7 @@
 #define PI 3.14159265359
 
 // How many instances of the uv are onscreen.
-float repeat = 20.0;
+float repeat = 10.0;
 
 // How spaced out each uv is.
 float spacing = 1.5;
@@ -15,7 +15,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Pixel position, from 0 to 1 across the screen.
     vec2 uv = fragCoord / iResolution.xy;
 
-    float angle = iTime + sqrt(pow(x, 2.0), pow(uv.y, 2.0));
+    float angle = iTime + sqrt(pow(uv.x, 2.0) + pow(uv.y, 2.0));
     vec2 offset = vec2(-iMouse.xy)/ iResolution.xy;
 
     vec2 rot_uv = vec2((uv.x + offset.x) * sin(angle) - (uv.y + offset.y) * cos(angle), uv.x * cos(angle) + (uv.y + offset.y) * sin(angle));
@@ -26,6 +26,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     if (new_uv.x > 1. || new_uv.y > 1.)
     {
-        fragColor = vec4(0.0);
+        fragColor = vec4(rot_uv.x, rot_uv.y, 0.0, 1.0);
     }
 }
