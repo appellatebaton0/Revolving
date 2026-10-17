@@ -28,9 +28,19 @@ vec2 rotate(vec2 vector, float angle)
     return vec2(vector.x * sin(angle) - vector.y * cos(angle), vector.x * cos(angle) + vector.y * sin(angle));
 }
 
+vec4 get_background_color(vec2 uv)
+{
+
+
+
+    return vec4(0.0);
+}
+
+
 vec4 get_instance_color(vec2 uv)
 {
-    float dist = sqrt(pow(uv.x - 0.5, 2.0) + pow(uv.y - 0.5, 2.0));
+    vec2 cuv = uv - 0.5;
+    float dist = sqrt(pow(cuv.x, 2.0) + pow(cuv.y, 2.0));
 
     float opacity = 1.- 2. * dist;
     
@@ -39,12 +49,7 @@ vec4 get_instance_color(vec2 uv)
         return vec4(opacity);
     }
     
-    return vec4(0.0);
-}
-
-vec4 get_background_color(vec2 uv)
-{
-    return vec4(0.0);
+    return get_background_color(uv);
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
@@ -66,6 +71,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         fragColor = get_background_color(rot_uv);
     }
 
-    //fragColor = get_instance_color(uv);
+    fragColor = get_instance_color(uv);
 }
 
