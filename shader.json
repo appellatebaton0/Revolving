@@ -3,7 +3,7 @@
   "info": {
     "id": "",
     "name": "Revolving",
-    "description": "",
+    "description": "Using a lot of wrapping and a rotation matrix to do funky things to the UV coordinates :D\n\nAlso, we love having oodles of settings...",
     "tags": []
   },
   "renderpass": [
