@@ -5,10 +5,16 @@
 #define PI 3.14159265359
 
 // How many instances of the uv are onscreen.
-float repeat = 10.0;
+float repeat = 5.0;
 
 // How spaced out each uv is.
-float spacing = 1.3;
+float spacing = 1.0;
+
+// How many rings in each instance.
+float rings = 2.0;
+
+// How fast the rings close in on themselves.
+float ring_speed = 0.3;
 
 float random (vec2 st) {
     return fract(sin(dot(st.xy,
@@ -28,7 +34,7 @@ vec4 get_instance_color(vec2 uv)
 
     float opacity = 1.- 2. * dist;
     
-    if (mod(dist * 30. + iTime, 1.0) > 0.5)
+    if (mod(dist * rings + iTime * ring_speed, 1.0) > 0.5)
     {
         return vec4(opacity);
     }
@@ -60,6 +66,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         fragColor = get_background_color(rot_uv);
     }
 
-    fragColor = get_instance_color(uv);
+    //fragColor = get_instance_color(uv);
 }
 
