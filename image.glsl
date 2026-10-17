@@ -8,13 +8,16 @@ float repeat = 5.0;
 float spacing = 1.0;
 
 // How many rings in each instance.
-float rings = 10.0;
+float rings = 3.0;
 
 // How fast the rings close in on themselves.
 float ring_speed = 0.3;
 
 // The number of vertical and horizontal lines.
-vec2 lines = vec2()
+vec2 lines = vec2(2.0, 1.6);
+
+// How fast the lines scroll
+vec2 line_speed = vec2(0.3, -0.6);
 
 float random (vec2 st) {
     return fract(sin(dot(st.xy,
@@ -33,12 +36,12 @@ vec4 get_background_color(vec2 uv)
     bool fill = false;
     uv = rotate(uv - 0.5, iTime) + 0.5;
 
-    if (mod(uv.x * 4.0 + iTime * -0.8, 1.0) > 0.5)
+    if (mod(uv.x * lines.x + iTime * line_speed.x, 1.0) > 0.5)
     {
         fill = !fill;
     }
 
-    if (mod(uv.y * 3.0 + sin(iTime) * -0.3, 1.0) > 0.5)
+    if (mod(uv.y * lines.y + iTime * line_speed.y, 1.0) > 0.5)
     {
         fill = !fill;
     }
