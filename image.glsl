@@ -13,6 +13,8 @@ float rings = 3.0;
 // How fast the rings close in on themselves.
 float ring_speed = 0.8;
 
+vec4 ring_color_a =
+
 // The number of vertical and horizontal lines.
 vec2 lines = vec2(2.0, 1.6);
 
@@ -22,11 +24,6 @@ vec2 line_speed = vec2(0.3, -0.6);
 // How fast the lines spin.
 float line_spin = -0.3;
 
-float random (vec2 st) {
-    return fract(sin(dot(st.xy,
-                         vec2(12.9898,78.233)))*
-        43758.5453123);
-}
 
 // Based off the 2D rotation matrix, rotate a vec2 by an angle.
 vec2 rotate(vec2 vector, float angle)
@@ -49,7 +46,6 @@ vec4 get_background_color(vec2 uv)
         fill = !fill;
     }
 
-
     return vec4(fill);
 }
 
@@ -63,7 +59,14 @@ vec4 get_instance_color(vec2 uv)
     
     if (mod(dist * rings + iTime * ring_speed, 1.0) > 0.5)
     {
-        return vec4(opacity);
+        if (mod(dist * rings * 2.0 + iTime * ring_speed, 1.0) > 0.5)
+        {
+            return vec4(0.0);
+        }
+        else
+        {
+            return vec4(1.0);
+        }
     }
     
     return get_background_color(uv);
@@ -88,6 +91,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         fragColor = get_background_color(rot_uv);
     }
 
-    //fragColor = get_instance_color(uv);
+    fragColor = get_instance_color(uv);
 }
 
