@@ -24,7 +24,14 @@ vec2 rotate(vec2 vector, float angle)
 
 vec4 get_instance_color(vec2 uv)
 {
-    return vec4(1.0);
+    float dist = sqrt(pow(uv.x - 0.5, 2.0) + pow(uv.y - 0.5, 2.0));
+    
+    if (dist < sin(iTime) / 2.0)
+    {
+        return vec4(1.0);
+    }
+    
+    return vec4(dist);
 }
 
 vec4 get_background_color(vec2 uv)
@@ -50,5 +57,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     {
         fragColor = get_background_color(rot_uv);
     }
+
+    fragColor = get_instance_color(uv);
 }
 
