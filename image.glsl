@@ -22,6 +22,16 @@ vec2 rotate(vec2 vector, float angle)
     return vec2(vector.x * sin(angle) - vector.y * cos(angle), vector.x * cos(angle) + vector.y * sin(angle));
 }
 
+vec4 get_instance_color(vec2 uv)
+{
+    return vec4(1.0);
+}
+
+vec4 get_background_color(vec2 uv)
+{
+    return vec4(0.0);
+}
+
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     // Pixel position, from 0 to 1 across the screen.
@@ -34,15 +44,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     vec2 new_uv = mod(rot_uv * repeat, 1.) * spacing;
 
-    //float o = 0.4;
-    //new_uv = rotate(new_uv - vec2(o), angle) + vec2(o);
-
-    fragColor = vec4(new_uv.x, new_uv.y, 0.0, 1.0);
+    fragColor = get_instance_color(new_uv);
 
     if (new_uv.x > 1. || new_uv.y > 1.)
     {
-        float rand = random(rot_uv * 10000000.);
-
-        fragColor = vec4(rand, 0.0, 0.0, 1.0);
+        fragColor = get_background_color(rot_uv);
     }
 }
+
