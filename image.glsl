@@ -1,7 +1,7 @@
 // Define PI for angle stuff.
 #define PI 3.14159265359
 
-// How many instances of the uv are onscreen.
+// How many instances of the rings are onscreen.
 float repeat = 5.0;
 
 // How spaced out each uv is.
@@ -27,6 +27,9 @@ float line_spin = -0.3;
 
 vec4 line_color_a = vec4(0.1, 0.1, 0.4, 1.0);
 vec4 line_color_b = vec4(0.4, 0.2, 0.7, 1.0);
+
+// How fast the offset position moves, as what it's divided by.
+vec2 offset_divisor = vec2(30000.0, 50000.0);
 
 
 // Based off the 2D rotation matrix, rotate a vec2 by an angle.
@@ -77,7 +80,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 uv = fragCoord / iResolution.xy;
 
     float angle = iTime + sqrt(pow(uv.x, 2.0) + pow(uv.y, 2.0));
-    vec2 offset = vec2(iTime / 10000.0);
+    vec2 offset = vec2(iTime) / offset_divisor;
 
     vec2 rot_uv = rotate(uv + offset, angle);
 
