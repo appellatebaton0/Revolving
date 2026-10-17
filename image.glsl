@@ -10,11 +10,15 @@ float repeat = 10.0;
 // How spaced out each uv is.
 float spacing = 1.3;
 
+float random (vec2 st) {
+    return fract(sin(dot(st.xy,
+                         vec2(12.9898,78.233)))*
+        43758.5453123);
+}
+
 // Based off the 2D rotation matrix, rotate a vec2 by an angle.
 vec2 rotate(vec2 vector, float angle)
 {
-
-    float e = rand()
     return vec2(vector.x * sin(angle) - vector.y * cos(angle), vector.x * cos(angle) + vector.y * sin(angle));
 }
 
@@ -37,6 +41,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     if (new_uv.x > 1. || new_uv.y > 1.)
     {
-        fragColor = vec4(rot_uv.x, rot_uv.y, 0.0, 1.0);
+        float rand = random(rot_uv);
+
+        fragColor = vec4(rand, 0.0, 0.0, 1.0);
     }
 }
