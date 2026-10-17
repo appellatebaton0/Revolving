@@ -25,13 +25,15 @@ vec2 rotate(vec2 vector, float angle)
 vec4 get_instance_color(vec2 uv)
 {
     float dist = sqrt(pow(uv.x - 0.5, 2.0) + pow(uv.y - 0.5, 2.0));
+
+    float opacity = 1.- 2. * dist;
     
     if (mod(dist * 30. + iTime, 1.0) > 0.5)
     {
-        return vec4(1.0);
+        return vec4(opacity);
     }
     
-    return vec4(dist);
+    return vec4(0.0);
 }
 
 vec4 get_background_color(vec2 uv)
