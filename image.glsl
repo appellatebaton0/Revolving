@@ -1,11 +1,22 @@
+// Silly revolving rings shader
+// made by Baton in an hour for shadergator.
+// aaaahhh 5 seconds left writing this
+
 // Define PI for angle stuff.
 #define PI 3.14159265359
+
+// -- OVERALL -- //
 
 // How many instances of the rings are onscreen.
 float repeat = 5.0;
 
 // How spaced out each uv is.
 float spacing = 1.06;
+
+// How fast the offset position moves, as what it's divided by.
+vec2 offset_divisor = vec2(30000.0, 50000.0);
+
+// -- RINGS -- //
 
 // How many rings in each instance.
 float rings = 3.0;
@@ -15,6 +26,8 @@ float ring_speed = 0.8;
 
 vec4 ring_color_a = vec4(1.0, 0.0, 0.6, 1.0);
 vec4 ring_color_b = vec4(0.9, 0.6, 0.2, 1.0);
+
+// -- LINES -- //
 
 // The number of vertical and horizontal lines.
 vec2 lines = vec2(2.0, 1.6);
@@ -28,8 +41,7 @@ float line_spin = -0.3;
 vec4 line_color_a = vec4(0.1, 0.1, 0.4, 1.0);
 vec4 line_color_b = vec4(0.4, 0.2, 0.7, 1.0);
 
-// How fast the offset position moves, as what it's divided by.
-vec2 offset_divisor = vec2(30000.0, 50000.0);
+// -- -- //
 
 
 // Based off the 2D rotation matrix, rotate a vec2 by an angle.
