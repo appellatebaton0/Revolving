@@ -28,7 +28,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     vec2 new_uv = mod(rot_uv * repeat, 1.) * spacing;
 
-    new_uv = rotate(new_uv, angle) / 2.0;
+    new_uv = rotate(new_uv - vec2(0.5), angle) + vec2(0.5);
 
     fragColor = vec4(new_uv.x - 0.5, new_uv.y, 0.0, 1.0);
 
