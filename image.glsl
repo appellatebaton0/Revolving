@@ -5,19 +5,22 @@
 float repeat = 5.0;
 
 // How spaced out each uv is.
-float spacing = 1.0;
+float spacing = 1.5;
 
 // How many rings in each instance.
 float rings = 3.0;
 
 // How fast the rings close in on themselves.
-float ring_speed = 0.3;
+float ring_speed = 0.8;
 
 // The number of vertical and horizontal lines.
 vec2 lines = vec2(2.0, 1.6);
 
 // How fast the lines scroll
 vec2 line_speed = vec2(0.3, -0.6);
+
+// How fast the lines spin.
+float line_spin = -0.3;
 
 float random (vec2 st) {
     return fract(sin(dot(st.xy,
@@ -34,7 +37,7 @@ vec2 rotate(vec2 vector, float angle)
 vec4 get_background_color(vec2 uv)
 {
     bool fill = false;
-    uv = rotate(uv - 0.5, iTime) + 0.5;
+    uv = rotate(uv - 0.5, iTime * line_spin) + 0.5;
 
     if (mod(uv.x * lines.x + iTime * line_speed.x, 1.0) > 0.5)
     {
@@ -85,6 +88,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         fragColor = get_background_color(rot_uv);
     }
 
-    //fragColor = get_background_color(uv);
+    //fragColor = get_instance_color(uv);
 }
 
