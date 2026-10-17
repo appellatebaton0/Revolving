@@ -15,10 +15,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Pixel position, from 0 to 1 across the screen.
     vec2 uv = fragCoord / iResolution.xy;
 
-    float angle = iTime;
-    vec2 offset = vec2(0.5);
+    float angle = iTime + sqrt(pow(x, 2.0), pow(uv.y, 2.0));
+    vec2 offset = vec2(-iMouse.xy)/ iResolution.xy;
 
-    vec2 rot_uv = vec2(uv.x * sin(angle) - uv.y * cos(angle), uv.x * cos(angle) + uv.y * sin(angle));
+    vec2 rot_uv = vec2((uv.x + offset.x) * sin(angle) - (uv.y + offset.y) * cos(angle), uv.x * cos(angle) + (uv.y + offset.y) * sin(angle));
 
     vec2 new_uv = mod(rot_uv * repeat, 1.) * spacing;
 
