@@ -13,7 +13,7 @@ float spacing = 1.5;
 // Based off the 2D rotation matrix, rotate a vec2 by an angle.
 vec2 rotate(vec2 vector, float angle)
 {
-    return vec2(vector.x * sin(angle) - vector.y * cos(angle), vector.x * cos(angle) + vector.y * sin(angle))
+    return vec2(vector.x * sin(angle) - vector.y * cos(angle), vector.x * cos(angle) + vector.y * sin(angle));
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
@@ -24,9 +24,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float angle = iTime + sqrt(pow(uv.x, 2.0) + pow(uv.y, 2.0));
     vec2 offset = vec2(-iMouse.xy)/ iResolution.xy;
 
-    vec2 rot_uv = vec2((uv.x + offset.x) * sin(angle) - (uv.y + offset.y) * cos(angle), uv.x * cos(angle) + (uv.y + offset.y) * sin(angle));
+    vec2 rot_uv = rotate(uv + offset, angle);
 
     vec2 new_uv = mod(rot_uv * repeat, 1.) * spacing;
+
+    new_uv = rotate(new_uv, angle) / 2.0;
 
     fragColor = vec4(new_uv.x - 0.5, new_uv.y, 0.0, 1.0);
 
