@@ -26,7 +26,7 @@ vec4 get_instance_color(vec2 uv)
 {
     float dist = sqrt(pow(uv.x - 0.5, 2.0) + pow(uv.y - 0.5, 2.0));
     
-    if (mod(abs(dist - sin(iTime) / 4.0) * 100., 1.0) == 1.)
+    if (mod(dist * 30. + iTime, 1.0) > 0.5)
     {
         return vec4(1.0);
     }
