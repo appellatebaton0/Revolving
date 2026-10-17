@@ -1,7 +1,4 @@
-// Welcome! This is a Shadertoy-style shader.
-// mainImage runs once for each pixel, every frame.
-// Try changing a number, then watch the preview on the right.
-
+// Define PI for angle stuff.
 #define PI 3.14159265359
 
 // How many instances of the uv are onscreen.
@@ -30,11 +27,16 @@ vec2 rotate(vec2 vector, float angle)
 
 vec4 get_background_color(vec2 uv)
 {
-    float fill = 0.0;
+    bool fill = false;
 
     if (mod(uv.x * 4.0 + iTime * -0.8, 1.0) > 0.5)
     {
-        fill = 1.0;
+        fill = !fill;
+    }
+
+    if (mod(uv.y * 7.0 + sin(iTime) * -0.3, 1.0) > 0.5)
+    {
+        fill = !fill;
     }
 
 
@@ -76,6 +78,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         fragColor = get_background_color(rot_uv);
     }
 
-    //fragColor = get_instance_color(uv);
+    fragColor = get_background_color(uv);
 }
 
