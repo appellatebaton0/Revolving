@@ -28,7 +28,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 uv = fragCoord / iResolution.xy;
 
     float angle = iTime + sqrt(pow(uv.x, 2.0) + pow(uv.y, 2.0));
-    vec2 offset = vec2(-iMouse.xy)/ iResolution.xy;
+    vec2 offset = vec2(-iMouse.x / iResolution.x, iTime / 10000.0);
 
     vec2 rot_uv = rotate(uv + offset, angle);
 
@@ -41,7 +41,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     if (new_uv.x > 1. || new_uv.y > 1.)
     {
-        float rand = random(rot_uv);
+        float rand = random(rot_uv * 10000000.);
 
         fragColor = vec4(rand, 0.0, 0.0, 1.0);
     }
