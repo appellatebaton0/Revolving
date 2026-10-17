@@ -5,7 +5,7 @@
 float repeat = 5.0;
 
 // How spaced out each uv is.
-float spacing = 1.5;
+float spacing = 1.06;
 
 // How many rings in each instance.
 float rings = 3.0;
@@ -14,7 +14,7 @@ float rings = 3.0;
 float ring_speed = 0.8;
 
 vec4 ring_color_a = vec4(1.0, 0.0, 0.6, 1.0);
-vec4 ring_color_b = vec4(0.6, 1.0, 0.6, 1.0);
+vec4 ring_color_b = vec4(0.9, 0.6, 0.2, 1.0);
 
 // The number of vertical and horizontal lines.
 vec2 lines = vec2(2.0, 1.6);
@@ -25,8 +25,8 @@ vec2 line_speed = vec2(0.3, -0.6);
 // How fast the lines spin.
 float line_spin = -0.3;
 
-vec4 line_color_a = vec4(1.0, 0.0, 0.6, 1.0);
-vec4 line_color_b = vec4(0.6, 1.0, 0.6, 1.0);
+vec4 line_color_a = vec4(0.1, 0.1, 0.4, 1.0);
+vec4 line_color_b = vec4(0.4, 0.2, 0.7, 1.0);
 
 
 // Based off the 2D rotation matrix, rotate a vec2 by an angle.
@@ -65,7 +65,7 @@ vec4 get_instance_color(vec2 uv)
     {
         bool color_swap = mod(dist * rings * 2.0 + iTime * ring_speed, 1.0) > 0.5;
         
-        return color_ring_color_a : ring_color_b;
+        return color_swap ? ring_color_a : ring_color_b;
     }
     
     return get_background_color(uv);
@@ -77,7 +77,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 uv = fragCoord / iResolution.xy;
 
     float angle = iTime + sqrt(pow(uv.x, 2.0) + pow(uv.y, 2.0));
-    vec2 offset = vec2(-iMouse.x / iResolution.x, iTime / 10000.0);
+    vec2 offset = vec2(iTime / 10000.0);
 
     vec2 rot_uv = rotate(uv + offset, angle);
 
@@ -90,6 +90,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         fragColor = get_background_color(rot_uv);
     }
 
-    fragColor = get_instance_color(uv);
+    // View a single instance of the smaller shader.
+    //fragColor = get_instance_color(uv);
 }
 
