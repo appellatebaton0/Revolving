@@ -8,7 +8,7 @@
 float repeat = 10.0;
 
 // How spaced out each uv is.
-float spacing = 1.5;
+float spacing = 1.3;
 
 // Based off the 2D rotation matrix, rotate a vec2 by an angle.
 vec2 rotate(vec2 vector, float angle)
@@ -28,12 +28,13 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     vec2 new_uv = mod(rot_uv * repeat, 1.) * spacing;
 
-    new_uv = rotate(new_uv - vec2(0.5), angle) + vec2(0.5);
+    //float o = 0.4;
+    //new_uv = rotate(new_uv - vec2(o), angle) + vec2(o);
 
-    fragColor = vec4(new_uv.x - 0.5, new_uv.y, 0.0, 1.0);
+    fragColor = vec4(new_uv.x, new_uv.y, 0.0, 1.0);
 
     if (new_uv.x > 1. || new_uv.y > 1.)
     {
-        fragColor = vec4(rot_uv.x, rot_uv.y, 0.0, 1.0);
+        fragColor = vec4(1.);//rot_uv.x, rot_uv.y, 0.0, 1.0);
     }
 }
