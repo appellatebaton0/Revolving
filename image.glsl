@@ -10,6 +10,12 @@ float repeat = 10.0;
 // How spaced out each uv is.
 float spacing = 1.5;
 
+// Based off the 2D rotation matrix, rotate a vec2 by an angle.
+vec2 rotate(vec2 vector, float angle)
+{
+    return vec2(vector.x * sin(angle) - vector.y * cos(angle), vector.x * cos(angle) + vector.y * sin(angle))
+}
+
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     // Pixel position, from 0 to 1 across the screen.
