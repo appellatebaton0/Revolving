@@ -22,7 +22,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     vec2 new_uv = mod(rot_uv * repeat, 1.) * spacing;
 
-    fragColor = vec4(new_uv.x, new_uv.y, 0.0, 1.0);
+    fragColor = vec4(new_uv.x - 0.5, new_uv.y, 0.0, 1.0);
 
     if (new_uv.x > 1. || new_uv.y > 1.)
     {
