@@ -11,7 +11,7 @@ float repeat = 5.0;
 float spacing = 1.0;
 
 // How many rings in each instance.
-float rings = 2.0;
+float rings = 10.0;
 
 // How fast the rings close in on themselves.
 float ring_speed = 0.3;
@@ -30,10 +30,15 @@ vec2 rotate(vec2 vector, float angle)
 
 vec4 get_background_color(vec2 uv)
 {
+    float fill = 0.0;
+
+    if (mod(uv.x * 4.0 + iTime * -0.8, 1.0) > 0.5)
+    {
+        fill = 1.0;
+    }
 
 
-
-    return vec4(0.0);
+    return vec4(fill);
 }
 
 
@@ -71,6 +76,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         fragColor = get_background_color(rot_uv);
     }
 
-    fragColor = get_instance_color(uv);
+    //fragColor = get_instance_color(uv);
 }
 
