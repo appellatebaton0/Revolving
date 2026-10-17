@@ -1,6 +1,6 @@
 // Silly revolving rings shader
 // made by Baton in an hour for shadergator.
-// aaaahhh 5 seconds left writing this
+// aaaahhh 5 seconds left writing thiss
 
 // Define PI for angle stuff.
 #define PI 3.14159265359
